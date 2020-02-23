@@ -1,3 +1,16 @@
+/////////IMAGE
+function photo() {
+  fetch("https://jsonplaceholder.typicode.com/photos/1")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("pic").src = data.url;
+      console.log(data.url);
+      return data;
+    })
+    .catch(error => console.error(error));
+}
+photo();
+////////////////// INFORMATION OF USER
 function getOneUser(user) {
   fetch("https://jsonplaceholder.typicode.com/users/2")
     .then(res => res.json())
@@ -11,7 +24,9 @@ function getOneUser(user) {
       <p>Email: ${user.email ? user.email : "No email"}</p>
       <p>Address: ${
         user.address.street ? user.address.street : "No address street"
-      }</p>`;
+      } </p>
+      <p>City: ${user.address.city}</p>
+      <p>Phone: ${user.phone}</p>`;
       }
 
       showUser(user);
@@ -38,10 +53,11 @@ function getInfo() {
       UsersStatus = "";
       todos.forEach(function(user, index) {
         UsersStatus += `
-            <p>userID:${user.userId}</p>
-            <p>Id:${user.id}</p>
-            <p>Title:${user.title}</p>
-            <p>Status:${user.completed}</p>
+        <ul>User ${user.userId}
+            <li>Id:${user.id}</li>
+            <li>Title:${user.title}</li>
+            <li>Status:${user.completed}</li>
+        </ul>
           `;
       });
       document.getElementById("AllUsers").innerHTML = UsersStatus;
